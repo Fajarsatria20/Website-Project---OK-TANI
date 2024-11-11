@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password - OK TANI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .language-selector {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .language-selector a {
+        text-decoration: none;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .language-selector a:hover {
+        color: #4caf50;
+      }
+
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+        margin: 100px auto;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .logo h1 {
+        color: #4caf50;
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .logo p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .title {
+        text-align: center;
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 18px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        padding-right: 40px;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #4caf50;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 35px;
+        cursor: pointer;
+        color: #666;
+        user-select: none;
+      }
+
+      .password-requirements {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .password-requirements ul {
+        list-style-type: none;
+        margin-left: 5px;
+      }
+
+      .password-requirements li {
+        margin: 3px 0;
+      }
+
+      .password-requirements li::before {
+        content: "•";
+        color: #666;
+        margin-right: 5px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+
+      .submit-btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          width: 95%;
+          padding: 20px;
+          margin: 60px auto;
+        }
+
+        .language-selector {
+          position: relative;
+          justify-content: center;
+          top: 10px;
+          right: 0;
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <select class="language-selector">
+      <option>Bahasa Indonesia</option>
+      <option>English</option>
+      <option>Basa Jawa</option>
+      <option>Basa Sunda</option>
+      <option>Español</option>
+      <option>中文</option>
+    </select>
+
+    <div class="container">
+      <div class="logo">
+        <h1>OK TANI</h1>
+        <p>Solusi Pertanian Digital</p>
+      </div>
+
+      <h2 class="title">Buat Password Baru</h2>
+
+      <form id="resetPasswordForm">
+        <div class="form-group">
+          <label for="newPassword">Password Baru</label>
+          <input type="password" id="newPassword" name="newPassword" required />
+          <span class="password-toggle" onclick="togglePassword('newPassword')"
+            >👁️</span
+          >
+          <div class="password-requirements">
+            <ul>
+              <li>Minimal 8 karakter</li>
+              <li>Minimal 1 huruf besar</li>
+              <li>Minimal 1 huruf kecil</li>
+              <li>Minimal 1 angka</li>
+              <li>Minimal 1 karakter spesial (!@#$%^&*)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Konfirmasi Password Baru</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+          />
+          <span
+            class="password-toggle"
+            onclick="togglePassword('confirmPassword')"
+            >👁️</span
+          >
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Simpan Password Baru
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === "password" ? "text" : "password";
+      }
+
+      const form = document.getElementById("resetPasswordForm");
+      const newPassword = document.getElementById("newPassword");
+      const confirmPassword = document.getElementById("confirmPassword");
+      const submitBtn = document.getElementById("submitBtn");
+
+      function validatePassword(password) {
+        const minLength = password.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecial = /[!.-_#$%^&*]/.test(password);
+
+        return (
+          minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecial
+        );
+      }
+
+      function checkPasswords() {
+        const isValidPassword = validatePassword(newPassword.value);
+        const passwordsMatch = newPassword.value === confirmPassword.value;
+
+        submitBtn.disabled = !(isValidPassword && passwordsMatch);
+      }
+
+      newPassword.addEventListener("input", checkPasswords);
+      confirmPassword.addEventListener("input", checkPasswords);
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (
+          validatePassword(newPassword.value) &&
+          newPassword.value === confirmPassword.value
+        ) {
+          // Here you would typically send the new password to your server
+          alert("Password berhasil diperbarui!");
+          // Redirect to login page or show success message
+
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (
+              validatePassword(newPassword.value) &&
+              newPassword.value === confirmPassword.value
+            ) {
+              // Here you would typically send the new password to your server
+              alert("Password berhasil diperbarui!");
+              // Redirect to login page after alert is closed
+              window.location.href = "1. Halaman Login.html"; // Sesuaikan dengan path file login Anda
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

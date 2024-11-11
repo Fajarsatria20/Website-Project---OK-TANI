@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Pertanian</title>
+    <script>
+      function navigateTo(page) {
+        switch (page) {
+          case "beranda":
+            window.location.href = "3. Halaman Beranda.html";
+            break;
+          case "notifikasi":
+            window.location.href = "7. Halaman Notifikasi.html";
+            break;
+          case "profil":
+            window.location.href = "8. Halaman Profile.html";
+            break;
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        padding-bottom: 70px;
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .content {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #333;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        min-height: 150px;
+      }
+
+      .card-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .card-text {
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #666;
+      }
+
+      .nav-icon {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+      }
+
+      .nav-text {
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 480px) {
+        .content {
+          grid-template-columns: 1fr;
+          padding: 15px;
+        }
+
+        .bottom-nav {
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          background-color: white;
+          padding: 10px 0;
+          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-nav a {
+          text-decoration: none;
+          color: #333;
+          text-align: center;
+          padding: 5px 0;
+          width: 33.33%;
+          transition: all 0.3s ease;
+        }
+
+        .bottom-nav a.active {
+          color: #4caf50; /* Warna hijau untuk menu aktif */
+          background-color: rgba(
+            76,
+            175,
+            80,
+            0.1
+          ); /* Background hijau transparan */
+        }
+
+        .bottom-nav a:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">Beranda</header>
+    <!-- Tambahkan di bagian profil atau header -->
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <header class="app-header">
+      <h1>Aplikasi Pertanian</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Menu Grid -->
+      <div class="menu-grid">
+        <a href="4. Konsultasi Tani Chatbot.html" class="menu-item">
+          <div class="menu-icon">💬</div>
+          <div class="menu-label">Konsultasi Tani</div>
+        </a>
+
+        <a href="5. Info Cuaca.html" class="menu-item">
+          <div class="menu-icon">🌤️</div>
+          <div class="menu-label">Info Cuaca</div>
+        </a>
+
+        <a href="6. Kalender Tanaman.html" class="menu-item">
+          <div class="menu-icon">📅</div>
+          <div class="menu-label">Kalender Tanam</div>
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="javascript:void(0)" onclick="navigateTo('beranda')">
+        <div class="nav-icon">🏠</div>
+        <div class="nav-label">Beranda</div>
+      </a>
+      <a href="javascript:void(0)" onclick="navigateTo('notifikasi')">
+        <div class="nav-icon">🔔</div>
+        <div class="nav-label">Notifikasi</div>
+      </a>
+      <a href="javascript:void(0)" onclick="navigateTo('profil')">
+        <div class="nav-icon">👤</div>
+        <div class="nav-label">Profil</div>
+      </a>
+    </nav>
+
+    <script></script>
+    <!-- Tambahkan script ini di bagian head Halaman Beranda.html -->
+    <script>
+      // Cek status login saat halaman dimuat
+      window.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+        if (!isLoggedIn) {
+          // Jika belum login, redirect ke halaman login
+          window.location.href = "1. Halaman Login.html";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konsultasi Tani</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        padding-bottom: 70px;
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .back-button {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+      }
+
+      .chat-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .ai-assistant {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .ai-avatar {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        margin: 0 auto 15px;
+      }
+
+      .ai-avatar-circle {
+        width: 100%;
+        height: 100%;
+        background: #e8f5e9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ai-avatar-circle::before {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 60%;
+        background: #4caf50;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .ai-avatar-circle::after {
+        content: "💬";
+        position: absolute;
+        font-size: 1.8rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .quick-action {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .quick-action:hover {
+        transform: translateY(-2px);
+      }
+
+      .quick-action-icon {
+        font-size: 1.5rem;
+      }
+
+      .chat-area {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        height: calc(100vh - 400px);
+        overflow-y: auto;
+      }
+
+      .message {
+        margin-bottom: 15px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .message.user {
+        flex-direction: row-reverse;
+      }
+
+      .message-bubble {
+        background: #e8f5e9;
+        padding: 10px 15px;
+        border-radius: 15px;
+        max-width: 70%;
+      }
+
+      .message.user .message-bubble {
+        background: #4caf50;
+        color: white;
+      }
+
+      .message-avatar {
+        width: 35px;
+        height: 35px;
+        background: #e8f5e9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        position: relative;
+      }
+
+      .message-avatar::before {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 60%;
+        background: #4caf50;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .message-avatar::after {
+        content: "💬";
+        position: absolute;
+        font-size: 0.9rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .input-area {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 15px;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 10px;
+      }
+
+      .input-field {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        outline: none;
+      }
+
+      .send-button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .send-button:hover {
+        background: #45a049;
+      }
+
+      @media (max-width: 480px) {
+        .quick-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .chat-container {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="back-button">←</a>
+      <h1>Konsultasi Tani</h1>
+    </header>
+
+    <div class="chat-container">
+      <div class="ai-assistant">
+        <div class="ai-avatar">
+          <div class="ai-avatar-circle"></div>
+        </div>
+        <h2>Konsultasi Tani</h2>
+        <p>Asisten pintar yang siap membantu pertanian Anda</p>
+      </div>
+
+      <div class="quick-actions">
+        <div class="quick-action">
+          <span class="quick-action-icon">🌱</span>
+          <span>Hama &amp; Penyakit</span>
+        </div>
+        <div class="quick-action">
+          <span class="quick-action-icon">🌿</span>
+          <span>Teknik Budidaya</span>
+        </div>
+        <div class="quick-action">
+          <span class="quick-action-icon">💧</span>
+          <span>Sistem Irigasi</span>
+        </div>
+        <div class="quick-action">
+          <span class="quick-action-icon">🌾</span>
+          <span>Pasca Panen</span>
+        </div>
+      </div>
+
+      <div class="chat-area">
+        <div class="message">
+          <div class="message-avatar"></div>
+          <div class="message-bubble">
+            Halo! Saya adalah asisten Konsultasi Tani yang siap membantu Anda.
+            Silakan pilih topik atau ajukan pertanyaan seputar pertanian.
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input
+          type="text"
+          class="input-field"
+          placeholder="Ketik pertanyaan Anda..."
+        />
+        <button class="send-button">Kirim</button>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

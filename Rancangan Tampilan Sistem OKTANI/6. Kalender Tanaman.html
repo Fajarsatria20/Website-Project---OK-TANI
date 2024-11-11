@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalender Tanam</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        padding-bottom: 20px;
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .back-button {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+      }
+
+      .calendar-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .calendar-header {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .month-selector {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .calendar-grid {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
+
+      .day {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .day:hover {
+        background: #f0f0f0;
+      }
+
+      .day.has-event::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        width: 6px;
+        height: 6px;
+        background: #4caf50;
+        border-radius: 50%;
+      }
+
+      .planting-schedule {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+      }
+
+      .schedule-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .schedule-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8f5e9;
+        border-radius: 50%;
+      }
+
+      .schedule-info {
+        flex: 1;
+      }
+
+      .schedule-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .action-button {
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .add-schedule {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4caf50;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+
+      @media (max-width: 480px) {
+        .calendar-header {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="back-button">←</a>
+      <h1>Kalender Tanam</h1>
+    </header>
+
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <div class="month-selector">
+          <button class="action-button">←</button>
+          <h2>Oktober 2024</h2>
+          <button class="action-button">→</button>
+        </div>
+        <select style="padding: 8px; border-radius: 5px">
+          <option>Semua Tanaman</option>
+          <option>Padi</option>
+          <option>Jagung</option>
+          <option>Kedelai</option>
+        </select>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="weekdays">
+          <div>Min</div>
+          <div>Sen</div>
+          <div>Sel</div>
+          <div>Rab</div>
+          <div>Kam</div>
+          <div>Jum</div>
+          <div>Sab</div>
+        </div>
+        <div class="days">
+          <div class="day">29</div>
+          <div class="day">30</div>
+          <div class="day">1</div>
+          <div class="day">2</div>
+          <div class="day has-event">3</div>
+          <div class="day">4</div>
+          <div class="day">5</div>
+          <div class="day">6</div>
+          <div class="day has-event">7</div>
+          <div class="day">8</div>
+          <div class="day">9</div>
+          <div class="day">10</div>
+          <div class="day">11</div>
+          <div class="day">12</div>
+          <!-- ... more days ... -->
+        </div>
+      </div>
+
+      <div class="planting-schedule">
+        <h3 style="margin-bottom: 15px">Jadwal Tanam</h3>
+
+        <div class="schedule-item">
+          <div class="schedule-icon">🌾</div>
+          <div class="schedule-info">
+            <div style="font-weight: bold">Tanam Padi</div>
+            <div style="color: #666">3 Oktober 2024</div>
+          </div>
+          <div class="schedule-actions">
+            <button
+              class="action-button"
+              style="background: #e8f5e9; color: #4caf50"
+            >
+              Edit
+            </button>
+            <button
+              class="action-button"
+              style="background: #ffebee; color: #f44336"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-icon">🌽</div>
+          <div class="schedule-info">
+            <div style="font-weight: bold">Tanam Jagung</div>
+            <div style="color: #666">7 Oktober 2024</div>
+          </div>
+          <div class="schedule-actions">
+            <button
+              class="action-button"
+              style="background: #e8f5e9; color: #4caf50"
+            >
+              Edit
+            </button>
+            <button
+              class="action-button"
+              style="background: #ffebee; color: #f44336"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-schedule">+</div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

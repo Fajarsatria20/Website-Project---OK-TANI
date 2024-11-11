@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar - OK TANI</title>
+    <!-- Tambahkan Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      nav {
+        width: 100%;
+        text-align: right;
+        padding: 10px;
+      }
+
+      select {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      h1 {
+        color: #4caf50;
+        margin: 20px 0;
+      }
+
+      p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      small {
+        color: #666;
+        font-size: 12px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+
+      button:hover {
+        background-color: #4caf50;
+      }
+
+      .social-buttons {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .social-buttons button {
+        flex: 1;
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .social-buttons button:hover {
+        background-color: #f5f5f5;
+      }
+
+      .social-buttons .google-btn {
+        color: #db4437;
+      }
+
+      .social-buttons .facebook-btn {
+        color: #4267b2;
+      }
+
+      a {
+        color: #4caf50;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Styling untuk ikon */
+      .fa-google {
+        color: #db4437;
+      }
+
+      .fa-facebook {
+        color: #4267b2;
+      }
+    </style>
+    <script>
+      function redirectToLogin() {
+        // Ganti "login.html" dengan nama file halaman login yang sesuai
+        window.location.href = "1. Halaman Login.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <nav>
+        <select>
+          <option>Bahasa Indonesia</option>
+          <option>English</option>
+          <option>Basa Jawa</option>
+          <option>Basa Sunda</option>
+          <option>Español</option>
+          <option>中文</option>
+        </select>
+      </nav>
+    </div>
+
+    <div>
+      <h1>OK TANI</h1>
+      <p>Solusi Pertanian Digital</p>
+    </div>
+
+    <form onsubmit="event.preventDefault(); redirectToLogin();">
+      <input type="text" placeholder="Nama Lengkap" required />
+      <input type="email" placeholder="Email" required />
+      <input type="tel" placeholder="Nomor Telepon" required />
+      <input type="password" placeholder="Password" required />
+      <small>Minimal 8 karakter, kombinasi huruf dan angka</small>
+      <input type="password" placeholder="Konfirmasi Password" required />
+      <button type="submit">Daftar</button>
+
+      <p style="text-align: center">atau daftar dengan</p>
+      <div class="social-buttons">
+        <button type="button" class="google-btn">
+          <i class="fab fa-google"></i>
+          Google
+        </button>
+        <button type="button" class="facebook-btn">
+          <i class="fab fa-facebook"></i>
+          Facebook
+        </button>
+      </div>
+
+      <p style="text-align: center">
+        Dengan mendaftar, Anda menyetujui
+        <a href="#">Syarat & Ketentuan</a>
+        dan
+        <a href="#">Kebijakan Privasi</a>
+        kami
+      </p>
+
+      <p style="text-align: center">
+        Sudah punya akun?
+        <a href="#" onclick="redirectToLogin(); return false;">Masuk</a>
+      </p>
+    </form>
+  </body>
+</html>

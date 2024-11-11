@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+
+      .settings-container {
+        background: white;
+        padding: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        margin: 1rem 0;
+      }
+
+      .setting-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .setting-item:last-child {
+        border-bottom: none;
+      }
+
+      .setting-icon {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        width: 24px;
+      }
+
+      .setting-text {
+        flex-grow: 1;
+      }
+
+      .setting-value {
+        color: #999;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 24px;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+      }
+
+      input:checked + .slider {
+        background-color: #4caf50;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      .arrow {
+        color: #ccc;
+      }
+
+      .version {
+        color: #999;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0.5rem;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-item {
+        text-align: center;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        color: #666;
+        text-decoration: none;
+      }
+
+      .nav-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .active {
+        color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Pengaturan</h1>
+    </header>
+
+    <div class="settings-container">
+      <a href="#" class="setting-item">
+        <span class="setting-icon">🌐</span>
+        <span class="setting-text">Pilih Bahasa</span>
+        <span class="setting-value">Bahasa</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <div class="setting-item">
+        <span class="setting-icon">🌙</span>
+        <span class="setting-text">Mode Gelap</span>
+        <label class="toggle-switch">
+          <input type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-container">
+      <div class="section-title">Informasi Lainnya</div>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">🔔</span>
+        <span class="setting-text">Notifikasi</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">🏢</span>
+        <span class="setting-text">Tentang Perusahaan</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">💰</span>
+        <span class="setting-text">Donasi</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">❓</span>
+        <span class="setting-text">Bantuan &amp; FAQ</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">📱</span>
+        <span class="setting-text">Tentang Aplikasi</span>
+        <span class="version">v 2.0.18</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">📄</span>
+        <span class="setting-text">Ketentuan Layanan</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">🔒</span>
+        <span class="setting-text">Kebijakan Privasi</span>
+        <span class="arrow">›</span>
+      </a>
+    </div>
+
+    <div class="settings-container">
+      <div class="section-title">Akun</div>
+
+      <a href="#" class="setting-item">
+        <span class="setting-icon">↪️</span>
+        <span class="setting-text">Keluar</span>
+        <span class="arrow">›</span>
+      </a>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item">
+        <div class="nav-icon">🏠</div>
+        <div>Beranda</div>
+      </a>
+      <a href="#" class="nav-item">
+        <div class="nav-icon">🔔</div>
+        <div>Notifikasi</div>
+      </a>
+      <a href="#" class="nav-item active">
+        <div class="nav-icon">👤</div>
+        <div>Profil</div>
+      </a>
+    </nav>
+
+    <script src="js/main.js"></script>
+    <!-- Tambahkan button logout di halaman profil -->
+    <button onclick="logout()" class="logout-btn">Logout</button>
+
+    <script>
+      function logout() {
+        // Hapus status login
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+
+        // Redirect ke halaman login
+        window.location.href = "1. Halaman Login.html";
+      }
+    </script>
+  </body>
+</html>
