@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Halaman Daftar</title>
+    <style>
+      body {
+        background-color: #0b3d2e;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+      }
+      .back-arrow {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 40px;
+      }
+      label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .btn {
+        background-color: #4a6a5a;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+      .login {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .login a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="back-arrow">&larr;</div>
+      <h1>DAFTAR</h1>
+      <form>
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" name="name" />
+        <label for="email">Alamat Email</label>
+        <input type="email" id="email" name="email" />
+        <label for="phone">Nomor Telepon</label>
+        <input type="tel" id="phone" name="phone" />
+        <label for="password">Kata Sandi</label>
+        <input type="password" id="password" name="password" />
+        <label for="confirm-password">Konfirmasi Kata Sandi</label>
+        <input type="password" id="confirm-password" name="confirm-password" />
+        <button type="submit" class="btn">DAFTAR</button>
+      </form>
+      <div class="login">Sudah punya akun? <a href="#">Masuk</a></div>
+    </div>
+  </body>
+</html>

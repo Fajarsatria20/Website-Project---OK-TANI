@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>OK TANI</title>
+    <script src="main.js" defer></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #0b3d2e;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        text-align: center;
+      }
+      .logo {
+        margin-bottom: 50px;
+      }
+      .logo img {
+        width: 200px;
+        height: auto;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .button {
+        background-color: #3a5a40;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .button:hover {
+        background-color: #2e4a33;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img alt=" OK TANI" height="200" src="OKTANI.png 2.PNG" width="200" />
+      </div>
+      <div class="buttons">
+        <button class="button" onclick="handleClick('LOGIN')">LOGIN</button>
+        <button class="button" onclick="handleClick('SIGN IN')">SIGN IN</button>
+      </div>
+    </div>
+    <script>
+      function handleClick(buttonType) {
+        alert(buttonType + " button clicked");
+      }
+    </script>
+  </body>
+</html>
